@@ -1,0 +1,40 @@
+﻿@model GameRoom
+@{
+    ViewData["Title"] = "Удаление комнаты";
+}
+
+<form method="post" asp-action="DeleteGameRoom" class="card border-secondary mt-5">
+    <div class="card-header d-flex justify-content-between align-items-center">
+        <p class="m-0">Удаление комнаты</p>
+        <a class="btn btn-outline-secondary" asp-controller="AdminTools" asp-action="GameRoomsTable"><i class="bi bi-box-arrow-left"></i></a>
+    </div>
+
+    <div class="card-body">
+        <div class="form-group">
+            <div class="mt-2">
+                <label asp-for="number" class="form-label"></label>
+                <input asp-for="number" type="number" class="form-control" placeholder="Введите номер комнаты" disabled="">
+            </div>
+
+            <div class="mt-2">
+                <label asp-for="rentPrice" class="form-label"></label>
+                <input asp-for="rentPrice" type="number" class="form-control" placeholder="Введите стоимость брони" disabled="">
+            </div>
+
+            <div class="mt-2">
+                <label asp-for="places" class="form-label"></label>
+                <input asp-for="places" type="number" class="form-control" placeholder="Введите количество мест" disabled="">
+            </div>
+
+            <div class="mt-2 mb-4">
+                <label asp-for="imageOf" class="form-label"></label>
+                <input asp-for="imageOf" type="text" class="form-control" placeholder="Введите ссылку на изображение" disabled="">
+            </div>
+
+            <div class="modal-footer mt-2">
+                <button type="submit" class="btn btn-danger">Удалить</button>
+            </div>
+        </div>
+    </div>
+</form>
+

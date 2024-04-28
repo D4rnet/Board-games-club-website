@@ -1,0 +1,56 @@
+﻿@model IEnumerable<User>
+@{
+    ViewData["Title"] = "Таблица пользователей";
+}
+
+<div class="container mt-3 p-2">
+    <div class="row pt-4">
+        <div class="col-6">
+            <h2>Список пользователей</h2>
+        </div>
+        <div class="col-6 text-end">
+            <a asp-controller="AdminTools" asp-action="CreateUser" class="btn btn-secondary">
+                Добавить пользователя &nbsp; <i class="bi bi-plus-circle"></i>
+            </a>
+        </div>
+    </div>
+</div>
+
+<br />
+<div class="table-responsive">
+    <table class="table table-hover">
+        <thead>
+            <tr class="table-primary">
+                <td>Электронная почта</td>
+                <td>Пароль</td>
+                <td>Имя</td>
+                <td>Фамилия</td>
+                <td>Роль</td>
+                <td width="260px"></td>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var obj in Model)
+            {
+                <tr>
+                    <td>@obj.email</td>
+                    <td>@obj.passwordOf</td>
+                    <td>@obj.firstname</td>
+                    <td>@obj.lastname</td>
+                    <td>@obj.roleOf</td>
+                    <td>
+                        <div class="btn-group">
+                            <a asp-controller="AdminTools" asp-action="EditUser" asp-route-id="@obj.email" class="btn btn-secondary">
+                                <i class="bi bi-pencil-square"></i> &nbsp; Изменить
+                            </a>
+
+                            <a asp-controller="AdminTools" asp-action="DeleteUser" asp-route-id="@obj.email" class="btn btn-danger">
+                                <i class="bi bi-trash3"></i> &nbsp; Удалить
+                            </a>
+                        </div>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

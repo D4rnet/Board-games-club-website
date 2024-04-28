@@ -1,0 +1,135 @@
+﻿@model Profile
+@{
+    ViewData["Title"] = "Профиль";
+}
+
+<h1 class="text-center m-5">Профиль</h1>
+
+<div class="profileGrid">
+    <div>
+        <div>
+            <div class="mt-2">
+                <label asp-for="firstname" class="form-label"></label>
+                <input asp-for="firstname" type="text" class="form-control w-50" disabled="">
+            </div>
+
+            <div class="mt-2 mb-3">
+                <label asp-for="lastname" class="form-label"></label>
+                <input asp-for="lastname" type="text" class="form-control w-50" disabled="">
+            </div>
+
+            <a class="d-inline-flex btn btn-primary my-2 my-sm-0" asp-controller="User" asp-action="EditFullName">
+                Изменить
+            </a>
+        </div>
+
+        <br />
+
+        <div>
+            <a class="d-inline-flex btn btn-primary my-2 my-sm-0" asp-controller="User" asp-action="EditPassword">
+                Сменить пароль
+            </a>
+        </div>
+
+        <br />
+
+        <a class="d-inline-flex btn btn-danger my-2 my-sm-0" asp-controller="User" asp-action="LogOut">
+            Выйти из профиля
+        </a>
+
+        <br />
+        <br />
+    </div>
+
+    <div>
+        @{
+            if (Model.rents.Where(rent => rent.openRent == null).Count() > 0)
+            {
+                <div>
+                    <h5>Ваши брони</h5>
+                    <div class="table-responsive">
+                        <div class="d-flex align-items-center" style="height: 220px;">
+                            @foreach (var obj in Model.rents.Where(rent => rent.openRent == null))
+                            {
+                                <a asp-controller="User" asp-action="RentInfo" asp-route-id="@obj.rent.id" class="hoverCard btn card text-white bg-secondary p-0 mx-2" style="height: 200px; min-width: 300px;">
+                                    <div class="card-img-top" style="background: url(@obj.gameRoom.imageOf); width: 100%; height: 100%; background-position: 50% 50%; background-size: cover; "></div>
+                                    <div class="card-body d-flex justify-content-between p-2">
+                                        <p class="m-0">
+                                            @obj.rent.timeOf.Value.ToShortDateString() @obj.rent.timeOf.Value.ToShortTimeString()
+                                        </p>
+                                        <p class="card-text my-0 mx-2">@obj.rent.price BYN</p>
+                                    </div>
+                                </a>
+                            }
+                        </div>
+                    </div>
+                </div>
+                <br />
+            }
+        }
+
+        @{
+            if (Model.rents.Where(rent => rent.openRent != null).Count() > 0)
+            {
+                <div>
+                    <h5>Ваши открытые брони</h5>
+                    <div class="table-responsive">
+                        <div class="d-flex align-items-center" style="height: 220px;">
+                            @foreach (var obj in Model.rents.Where(rent => rent.openRent != null))
+                            {
+                                <a asp-controller="User" asp-action="OpenRentInfo" asp-route-id="@obj.rent.id" class="hoverCard btn card text-white bg-secondary p-0 mx-2" style="height: 200px; min-width: 300px;">
+                                    <div class="card-img-top" style="background: url(@obj.gameRoom.imageOf); width: 100%; height: 100%; background-position: 50% 50%; background-size: cover; "></div>
+                                    <div class="card-body d-flex justify-content-between p-2">
+                                        <p class="m-0">
+                                            @obj.rent.timeOf.Value.ToShortDateString() @obj.rent.timeOf.Value.ToShortTimeString()
+                                        </p>
+
+                                        <div class="d-flex mx-2">
+                                            <i class="bi bi-people-fill"></i>
+                                            <p class="card-text my-0 mx-1">
+                                                @obj.openRent.peopleCount/@obj.gameRoom.places мест
+                                            </p>
+                                        </div>
+                                    </div>
+                                </a>
+                            }
+                        </div>
+                    </div>
+                </div>
+                <br />
+            }
+        }
+
+
+
+        @{
+            if (Model.joinRents.Count() > 0)
+            {
+                <div>
+                    <h5>Брони к которым вы присоединились</h5>
+                    <div class="table-responsive">
+                        <div class="d-flex align-items-center" style="height: 220px;">
+                            @foreach (var obj in Model.joinRents)
+                            {
+                                <a asp-controller="User" asp-action="JoinToRentInfo" asp-route-id="@obj.id" class="hoverCard btn card text-white bg-secondary p-0 mx-2" style="height: 200px; min-width: 300px;">
+                                    <div class="card-img-top" style="background: url(@obj.gameRoom.imageOf); width: 100%; height: 100%; background-position: 50% 50%; background-size: cover; "></div>
+                                    <div class="card-body d-flex justify-content-between p-2">
+                                        <p class="card-text my-0 mx-2"> @obj.timeOf.Value.ToShortDateString() @obj.timeOf.Value.ToShortTimeString()</p>
+
+                                        <div class="d-flex mx-2">
+                                            <i class="bi bi-people-fill"></i>
+                                            <p class="card-text my-0 mx-1">
+                                                @obj.occupiedPlaces/@obj.gameRoom.places мест
+                                            </p>
+                                        </div>
+                                    </div>
+                                </a>
+                            }
+                        </div>
+                    </div>
+                </div>
+            }
+        }
+    </div>
+</div>
+

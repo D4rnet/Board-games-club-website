@@ -1,0 +1,67 @@
+﻿@model IEnumerable<BoardGame>
+@{
+    ViewData["Title"] = "Таблица настольных игр";
+}
+
+<div class="container mt-3 p-2">
+    <div class="row pt-4">
+        <div class="col-6">
+            <h2>Список настольных игр</h2>
+        </div>
+        <div class="col-6 text-end">
+            <a asp-controller="AdminTools" asp-action="CreateBoardGame" class="btn btn-secondary">
+                Добавить настольную игру &nbsp; <i class="bi bi-plus-circle"></i>
+            </a>
+        </div>
+    </div>
+</div>
+
+<br />
+
+<div class="table-responsive">
+    <table class="table table-hover table-responsive" style="width:2500px">
+        <thead>
+            <tr class="table-primary align-text-top">
+                <td>Название</td>
+                <td>Минимальное количество игроков</td>
+                <td>Максимальное количество игроков</td>
+                <td>Средняя продолжительность</td>
+                <td>Возрастная категория</td>
+                <td>Тип</td>
+                <td>Производитель</td>
+                <td>Описание</td>
+                <td>Изображение</td>
+                <td>Стоимость брони</td>
+                <td width="260px"></td>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var obj in Model)
+            {
+                <tr>
+                    <td>@obj.nameOf</td>
+                    <td>@obj.minPlayers</td>
+                    <td>@obj.maxPlayers</td>
+                    <td>@obj.avgDuration</td>
+                    <td>@obj.ageCategory</td>
+                    <td>@obj.typeOf</td>
+                    <td>@obj.manufacturer</td>
+                    <td class="textJustify">@obj.descriptionOf</td>
+                    <td>@obj.imageOf</td>
+                    <td>@obj.rentPrice</td>
+                    <td>
+                        <div class="btn-group">
+                            <a asp-controller="AdminTools" asp-action="EditBoardGame" asp-route-id="@obj.nameOf" class="btn btn-secondary">
+                                <i class="bi bi-pencil-square"></i> &nbsp; Изменить
+                            </a>
+
+                            <a asp-controller="AdminTools" asp-action="DeleteBoardGame" asp-route-id="@obj.nameOf" class="btn btn-danger">
+                                <i class="bi bi-trash3"></i> &nbsp; Удалить
+                            </a>
+                        </div>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

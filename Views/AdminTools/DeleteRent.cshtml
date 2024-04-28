@@ -1,0 +1,54 @@
+﻿@model NewRent
+@{
+    ViewData["Title"] = "Удаление брони";
+}
+
+<form method="post" asp-action="DeleteRent" class="card border-secondary mt-5">
+    <input asp-for="@Model.rent.id" hidden="" />
+    <div class="card-header d-flex justify-content-between align-items-center">
+        <p class="m-0">Удаление брони</p>
+        <a class="btn btn-outline-secondary" asp-controller="AdminTools" asp-action="RentsTable"><i class="bi bi-box-arrow-left"></i></a>
+    </div>
+
+    <div class="card-body">
+        <div class="form-group">
+            <div class="mt-2">
+                <label asp-for="@Model.rent.orgnizerEmail" class="form-label"></label>
+                <select asp-for="@Model.rent.orgnizerEmail" class="form-select" disabled="">
+                    @{
+                        foreach (var obj in Model.users)
+                        {
+                            <option>@obj.email</option>
+                        }
+                    }
+                </select>
+            </div>
+
+            <div class="mt-2">
+                <label asp-for="@Model.rent.roomNumber" class="form-label"></label>
+                <select asp-for="@Model.rent.roomNumber" class="form-select" disabled="">
+                    @{
+                        foreach (var obj in Model.gameRooms)
+                        {
+                            <option>@obj.number</option>
+                        }
+                    }
+                </select>
+            </div>
+
+            <div class="mt-2">
+                <label asp-for="@Model.rent.timeOf" class="form-label"></label>
+                <input asp-for="@Model.rent.timeOf" type="datetime-local" class="form-control" disabled="">
+            </div>
+
+            <div class="mt-2 mb-4">
+                <label asp-for="@Model.rent.duration" class="form-label"></label>
+                <input asp-for="@Model.rent.duration" type="number" class="form-control" placeholder="Введите продолжительность брони" disabled="">
+            </div>
+
+            <div class="modal-footer mt-2">
+                <button type="submit" class="btn btn-danger">Удалить</button>
+            </div>
+        </div>
+    </div>
+</form>

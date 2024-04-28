@@ -1,0 +1,160 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - Диплом</title>
+    <link rel="stylesheet" href="~/css/UnitedTheme.css" />
+    <link href="~/css/site.css?v=@DateTime.Now.Millisecond" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
+    <style media="screen">
+        :root {
+            --main-bg-up: #FFF4F0;
+            --main-bg-right: #FFF9F6;
+            --main-bg-left: #FFFFFF;
+        }
+
+        body {
+            background-color: var(--main-bg-right);
+            background-image: linear-gradient(30deg, var(--main-bg-up) 12%, transparent 12.5%, transparent 87%, var(--main-bg-up) 87.5%, var(--main-bg-up)), linear-gradient(150deg, var(--main-bg-up) 12%, transparent 12.5%, transparent 87%, var(--main-bg-up) 87.5%, var(--main-bg-up)), linear-gradient(30deg, var(--main-bg-up) 12%, transparent 12.5%, transparent 87%, var(--main-bg-up) 87.5%, var(--main-bg-up)), linear-gradient(150deg, var(--main-bg-up) 12%, transparent 12.5%, transparent 87%, var(--main-bg-up) 87.5%, var(--main-bg-up)), linear-gradient(60deg, var(--main-bg-left) 25%, transparent 25.5%, transparent 75%, var(--main-bg-left) 75%, var(--main-bg-left)), linear-gradient(60deg, var(--main-bg-left) 25%, transparent 25.5%, transparent 75%, var(--main-bg-left) 75%, var(--main-bg-left));
+            background-size: 80px 140px;
+            background-position: 0 0,0 0,40px 70px, 40px 70px,0 0,40px 70px;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+            <div class="container-fluid">
+                @{
+                    if (LogInUser.role != "admin")
+                    {
+                        <a class="navbar-brand" asp-controller="Home" asp-action="Main">BGC</a>
+                        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
+                            <span class="navbar-toggler-icon"></span>
+                        </button>
+                        <div class="collapse navbar-collapse" id="navbarColor01">
+                            <ul class="navbar-nav me-auto">
+                                <li class="nav-item">
+                                    <a class="nav-link" asp-controller="GameRooms" asp-action="List">
+                                        Игровые комнаты
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" asp-controller="BoardGames" asp-action="List">
+                                        Настольные игры
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" asp-controller="GameRooms" asp-action="OpenRentsList">
+                                        Открытые брони
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" asp-controller="Home" asp-action="AboutClub">
+                                        О клубе
+                                    </a>
+                                </li>
+                            </ul>
+                            @{
+                                if (String.IsNullOrEmpty(LogInUser.email))
+                                {
+                                    <a class="d-inline-flex btn btn-secondary my-2 my-sm-0" asp-controller="User" asp-action="Authorization">Войти</a>
+                                }
+                                else
+                                {
+                                    <a class="navbar-nav nav-link py-0 mx-2" asp-controller="User" asp-action="Profile">
+                                        <h4 class="m-0">
+                                            <i class="bi bi-person-circle"></i>
+                                        </h4>
+                                    </a>
+                                }
+                            }
+                        </div>
+                    }
+                    else
+                    {
+                        <a class="navbar-brand">BGC</a>
+                        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
+                            <span class="navbar-toggler-icon"></span>
+                        </button>
+                        <div class="collapse navbar-collapse" id="navbarColor01">
+                            <ul class="navbar-nav me-auto">
+                                <li class="nav-item">
+                                    <a class="nav-link" asp-controller="AdminTools" asp-action="GameRoomsTable">
+                                        Игровые комнаты
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" asp-controller="AdminTools" asp-action="BoardGamesTable">
+                                        Настольные игры
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" asp-controller="AdminTools" asp-action="RentsTable">
+                                        Брони
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" asp-controller="AdminTools" asp-action="UsersTable">
+                                        Пользователи
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" asp-controller="AdminTools" asp-action="OpenRentsTable">
+                                        Открытые брони
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" asp-controller="AdminTools" asp-action="MembersTable">
+                                        Участники
+                                    </a>
+                                </li>
+                            </ul>
+                            <a class="d-inline-flex btn btn-secondary my-2 my-sm-0" asp-controller="User" asp-action="LogOut">Выйти из режима администратора</a>
+                        </div>
+                    }
+                }
+            </div>
+        </nav>
+    </header>
+
+    <div class="container py-4">
+        <main role="main" class="pb-3">
+            @RenderBody()
+        </main>
+    </div>
+
+    @for (int i = 0; i < 4; i++)
+    {
+        <br />
+    }
+
+    <footer class="border-top footer bg-white">
+        <div class="container d-flex justify-content-between align-items-center p-1">
+            <h5>&copy; 2023 - BGC</h5>
+            <div class="d-flex flex-row">
+                <div class="d-flex flex-column mx-5">
+                    <h5>Контакты</h5>
+                    <p class="m-0">+375440561238</p>
+                    <p class="m-0">+375298094902</p>
+                    <br>
+                    <p class="align-text-bottom">Адрес: пр. Независимости 34</p>
+                </div>
+                <div class="d-flex flex-column">
+                    <h5>Режим работы</h5>
+                    <p class="m-0"><b>понедельник: выходной</b></p>
+                    <p class="m-0">вторик-среда: 16:00-24:00</p>
+                    <p class="m-0">четверг-пятница: 16:00-24:00</p>
+                    <p class="m-0">суббота-воскресенье: 14:00-24:00</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>

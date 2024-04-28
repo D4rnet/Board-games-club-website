@@ -1,0 +1,124 @@
+﻿@model UserRent
+@{
+    ViewData["Title"] = "Бронь игровой комнаты";
+}
+
+<div class="d-flex flex-column align-items-center mt-5">
+    <div class="card border-secondary mb-3" style="max-width: 24em; min-width: 24rem;">
+        <div class="card-header d-flex justify-content-between align-items-center">
+            <p class="m-0">Бронь</p>
+            <a class="btn btn-outline-secondary" asp-controller="GameRooms" asp-action="List"><i class="bi bi-box-arrow-left"></i></a>
+        </div>
+
+        <div class="card-body p-0">
+            <div class="p-0">
+                <div style="background: url(@Model.gameRoom.imageOf); width: 100%; height: 180px; background-position: 50% 50%; background-size: cover; "></div>
+                <div class="d-flex justify-content-between p-2">
+                    <div class="d-flex mx-2">
+                        <i class="bi bi-people-fill"></i>
+                        @{
+                            if (Model.gameRoom.places < 5)
+                            {
+                                <p class="card-text my-0 mx-1">
+                                    @Model.gameRoom.places места
+                                </p>
+                            }
+                            else
+                            {
+                                <p class="card-text my-0 mx-1">
+                                    @Model.gameRoom.places мест
+                                </p>
+                            }
+                        }
+                    </div>
+                    <p class="card-text my-0 mx-2">@Model.gameRoom.rentPrice BYN/час</p>
+                </div>
+            </div>
+            <div class="accordion " id="accordionExample">
+                <div class="accordion-item">
+                    <h2 class="accordion-header">
+                        <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                            Обычная бронь
+                        </button>
+                    </h2>
+                    <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
+                        <form method="post" asp-action="Rent" class="accordion-body">
+                            <input asp-for="@Model.rent.roomNumber" hidden="" />
+                            <input asp-for="@Model.rent.orgnizerEmail" hidden="" />
+                            <div class="form-group">
+                                <div>
+                                    <label asp-for="@Model.rent.timeOf" class="form-label"></label>
+                                    <input asp-for="@Model.rent.timeOf" type="datetime-local" class="form-control">
+                                    <span class="text-danger" style="font-size: 14px;" asp-validation-for="@Model.rent.timeOf"></span>
+                                </div>
+
+                                <div class="mt-2 mb-4">
+                                    <label asp-for="@Model.rent.duration" class="form-label"></label>
+                                    <input asp-for="@Model.rent.duration" type="number" class="form-control" placeholder="Введите продолжительность брони">
+                                    <span class="text-danger" style="font-size: 14px;" asp-validation-for="@Model.rent.duration"></span>
+                                </div>
+
+                                <div class="modal-footer mt-2 d-flex flex-column align-items-center">
+                                    <button type="submit" class="btn btn-primary">Бронировать</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                <div class="accordion-item">
+                    <h2 class="accordion-header">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                            Открытая бронь
+                        </button>
+                    </h2>
+                    <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#accordionExample">
+                        <form method="post" asp-action="OpenRent" class="accordion-body">
+                            <input asp-for="@Model.rent.roomNumber" hidden="" />
+                            <input asp-for="@Model.rent.orgnizerEmail" hidden="" />
+                            <div class="form-group">
+                                <div class="mt-2">
+                                    <label asp-for="@Model.rent.timeOf" class="form-label"></label>
+                                    <input asp-for="@Model.rent.timeOf" type="datetime-local" class="form-control">
+                                    <span class="text-danger" style="font-size: 14px;" asp-validation-for="@Model.rent.timeOf"></span>
+                                </div>
+
+                                <div class="mt-2">
+                                    <label asp-for="@Model.rent.duration" class="form-label"></label>
+                                    <input asp-for="@Model.rent.duration" type="number" class="form-control" placeholder="Введите продолжительность брони">
+                                    <span class="text-danger" style="font-size: 14px;" asp-validation-for="@Model.rent.duration"></span>
+                                </div>
+
+                                <div class="mt-2">
+                                    <label asp-for="@Model.openRent.peopleCount" class="form-label"></label>
+                                    <input asp-for="@Model.openRent.peopleCount" type="number" class="form-control" placeholder="Введите сколько вас будет">
+                                    <span class="text-danger" style="font-size: 14px;" asp-validation-for="@Model.openRent.peopleCount"></span>
+                                </div>
+
+                                <div class="mt-2 mb-4">
+                                    <label asp-for="@Model.openRent.descriptionOf" class="form-label"></label>
+                                    <textarea asp-for="@Model.openRent.descriptionOf" class="form-control" placeholder="Введите описание" rows="3"></textarea>
+                                    <span class="text-danger" style="font-size: 14px;" asp-validation-for="@Model.openRent.descriptionOf"></span>
+                                </div>
+
+                                <div class="modal-footer mt-2 d-flex flex-column align-items-center">
+                                    <div class="d-flex">
+                                        <button type="submit" class="btn btn-primary">Бронировать</button>
+                                        <button type="button" class="btn btn-outline-info mx-2 p-1" data-bs-container="body" data-bs-toggle="popover" data-bs-placement="right" data-bs-content="Открыта бронь позваляет другим пользователям присоединится к вам" data-bs-original-title="Что такое открытая бронь?">
+                                            <i class="bi bi-question-lg"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts{
+    @{
+        <partial name="_ValidationScriptsPartial" />
+    }
+}

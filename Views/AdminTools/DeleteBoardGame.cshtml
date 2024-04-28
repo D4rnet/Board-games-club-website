@@ -1,0 +1,70 @@
+﻿@model BoardGame
+@{
+    ViewData["Title"] = "Удаление настольной игры";
+}
+
+<form method="post" asp-action="DeleteBoardGame" class="card border-secondary mt-5">
+    <div class="card-header d-flex justify-content-between align-items-center">
+        <p class="m-0">Удаление настольной игры</p>
+        <a class="btn btn-outline-secondary" asp-controller="AdminTools" asp-action="BoardGamesTable"><i class="bi bi-box-arrow-left"></i></a>
+    </div>
+
+    <div class="card-body">
+        <div class="form-group">
+            <div class="mt-2">
+                <label asp-for="nameOf" class="form-label"></label>
+                <input asp-for="nameOf" type="text" class="form-control" placeholder="Введите название" disabled="">
+            </div>
+
+            <div class="mt-2">
+                <label asp-for="minPlayers" class="form-label"></label>
+                <input asp-for="minPlayers" type="number" class="form-control" placeholder="Введите минимальное количество игроков" disabled="">
+            </div>
+
+            <div class="mt-2">
+                <label asp-for="maxPlayers" class="form-label"></label>
+                <input asp-for="maxPlayers" type="number" class="form-control" placeholder="Введите максимальное количество игроков" disabled="">
+            </div>
+
+            <div class="mt-2">
+                <label asp-for="avgDuration" class="form-label"></label>
+                <input asp-for="avgDuration" type="number" class="form-control" placeholder="Введите среднюю продолжительность" disabled="">
+            </div>
+
+            <div class="mt-2">
+                <label asp-for="ageCategory" class="form-label"></label>
+                <input asp-for="ageCategory" type="number" class="form-control" placeholder="Введите возрастную категорию" disabled="">
+            </div>
+
+            <div class="mt-2">
+                <label asp-for="typeOf" class="form-label"></label>
+                <input asp-for="typeOf" type="text" class="form-control" placeholder="Введите тип" disabled="">
+            </div>
+
+            <div class="mt-2">
+                <label asp-for="manufacturer" class="form-label"></label>
+                <input asp-for="manufacturer" type="text" class="form-control" placeholder="Введите производителя" disabled="">
+            </div>
+
+            <div class="mt-2">
+                <label asp-for="descriptionOf" class="form-label"></label>
+                <textarea asp-for="descriptionOf" class="form-control" placeholder="Введите описание" rows="3" disabled=""></textarea>
+            </div>
+
+            <div class="mt-2">
+                <label asp-for="imageOf" class="form-label"></label>
+                <input asp-for="imageOf" type="text" class="form-control" placeholder="Введите ссылку на изображение" disabled="">
+            </div>
+
+            <div class="mt-2 mb-4">
+                <label asp-for="rentPrice" class="form-label"></label>
+                <input asp-for="rentPrice" type="number" class="form-control" placeholder="Введите стоимость брони" disabled="">
+            </div>
+
+            <div class="modal-footer mt-2">
+                <button type="submit" class="btn btn-danger">Удалить</button>
+            </div>
+        </div>
+    </div>
+</form>
+

@@ -1,0 +1,43 @@
+﻿@model GameRoom
+@{
+    ViewData["Title"] = "Редактирование комнаты";
+}
+
+<form method="post" asp-action="EditGameRoom" class="card border-secondary mt-5">
+    <div class="card-header d-flex justify-content-between align-items-center">
+        <p class="m-0">Редактирование комнаты</p>
+        <a class="btn btn-outline-secondary" asp-controller="AdminTools" asp-action="GameRoomsTable"><i class="bi bi-box-arrow-left"></i></a>
+    </div>
+
+    <div class="card-body">
+        <div class="form-group">
+            <div class="mt-2">
+                <label asp-for="number" class="form-label"></label>
+                <input asp-for="number" type="number" class="form-control" placeholder="Введите номер комнаты" readonly="">
+                <span class="text-danger" style="font-size: 14px;" asp-validation-for="number"></span>
+            </div>
+
+            <div class="mt-2">
+                <label asp-for="rentPrice" class="form-label"></label>
+                <input asp-for="rentPrice" type="number" class="form-control" placeholder="Введите стоимость брони">
+                <span class="text-danger" style="font-size: 14px;" asp-validation-for="rentPrice"></span>
+            </div>
+
+            <div class="mt-2">
+                <label asp-for="places" class="form-label"></label>
+                <input asp-for="places" type="number" class="form-control" placeholder="Введите количество мест">
+                <span class="text-danger" style="font-size: 14px;" asp-validation-for="places"></span>
+            </div>
+
+            <div class="mt-2 mb-4">
+                <label asp-for="imageOf" class="form-label"></label>
+                <input asp-for="imageOf" type="text" class="form-control" placeholder="Введите ссылку на изображение">
+                <span class="text-danger" style="font-size: 14px;" asp-validation-for="imageOf"></span>
+            </div>
+
+            <div class="modal-footer mt-2">
+                <button type="submit" class="btn btn-primary">Обновить</button>
+            </div>
+        </div>
+    </div>
+</form>

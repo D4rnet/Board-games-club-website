@@ -1,0 +1,189 @@
+﻿/* Please see documentation at https://docs.microsoft.com/aspnet/core/client-side/bundling-and-minification
+for details on configuring this project to bundle and minify static web assets. */
+
+a.navbar-brand {
+    white-space: normal;
+    text-align: center;
+    word-break: break-all;
+}
+
+.nav-pills .nav-link.active, .nav-pills .show > .nav-link {
+    color: #fff;
+    background-color: #1b6ec2;
+    border-color: #1861ac;
+}
+
+/* Sticky footer styles
+-------------------------------------------------- */
+html {
+    font-size: 14px;
+}
+
+@media (min-width: 768px) {
+    html {
+        font-size: 16px;
+    }
+}
+
+.border-top {
+    border-top: 1px solid #e5e5e5;
+}
+
+.border-bottom {
+    border-bottom: 1px solid #e5e5e5;
+}
+
+.box-shadow {
+    box-shadow: 0 .25rem .75rem rgba(0, 0, 0, .05);
+}
+
+button.accept-policy {
+    font-size: 1rem;
+    line-height: inherit;
+}
+
+/* Sticky footer styles
+-------------------------------------------------- */
+html {
+    position: relative;
+    min-height: 100%;
+}
+
+body {
+    /*    background: url(../images/background.jpg) no-repeat;
+    background-position: 50% 50%;
+    background-size: cover;
+    background-attachment: fixed;*/
+    /* Margin bottom by footer height */
+    margin-bottom: 161px;
+}
+
+.footer {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    white-space: nowrap;
+    line-height: 28px;
+}
+
+.textJustify {
+    text-align: justify;
+}
+
+.alignMiddle {
+    height: 80vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.cardPadding {
+    padding: 0 15%;
+}
+
+.roomsGrid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-auto-rows: 250px;
+    grid-column-gap: 80px;
+    grid-row-gap: 60px;
+}
+
+.hoverCard {
+    transition: .2s ease-in;
+}
+
+    .hoverCard:hover {
+        transform: translateY(-4px);
+        box-shadow: 0px 5px 6px -4px #000000;
+    }
+
+.filterStruct {
+    display: grid;
+    grid-template-columns: 1fr 3fr;
+    grid-column-gap: 40px;
+}
+
+.boardGamesGrid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-auto-rows: 400px;
+    grid-column-gap: 40px;
+    grid-row-gap: 40px;
+}
+
+.dash {
+    width: 40px;
+    height: 2px;
+    background: #808080;
+    margin: 15px 20px;
+}
+
+.gameInfo {
+    display: grid;
+    grid-template-columns: 4fr 1fr;
+    grid-row-gap: 40px;
+    grid-column-gap: 10px;
+}
+
+.profileGrid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-column-gap: 40px;
+}
+
+.openRentGrid {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    grid-auto-rows: 250px;
+    grid-row-gap: 80px;
+    grid-column-gap: 80px;
+}
+
+@media (max-width:1400px) {
+    .boardGamesGrid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width:1000px) {
+    .roomsGrid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .cardPadding {
+        padding: 0 10%;
+    }
+
+    .filterStruct {
+        grid-template-columns: 2fr 3fr;
+    }
+
+    .boardGamesGrid {
+        grid-auto-rows: 345px;
+        grid-template-columns: 1fr;
+    }
+
+    .profileGrid {
+        grid-template-columns: 1fr;
+    }
+
+    .openRentGrid {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width:700px) {
+    .footer {
+        font-size: 9px;
+    }
+
+    .roomsGrid {
+        grid-template-columns: 1fr;
+        margin: 0 30px;
+    }
+
+    .cardPadding {
+        padding: 0 5%;
+    }
+}

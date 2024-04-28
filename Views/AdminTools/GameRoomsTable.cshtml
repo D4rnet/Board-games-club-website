@@ -1,0 +1,55 @@
+﻿@model IEnumerable<GameRoom>
+@{
+    ViewData["Title"] = "Таблица игровых комнат";
+}
+
+<div class="container mt-3 p-2">
+    <div class="row pt-4">
+        <div class="col-6">
+            <h2>Список игровых комнат</h2>
+        </div>
+        <div class="col-6 text-end">
+            <a asp-controller="AdminTools" asp-action="CreateGameRoom" class="btn btn-secondary">
+                Добавить комнату &nbsp; <i class="bi bi-plus-circle"></i>
+            </a>
+        </div>
+    </div>
+</div>
+
+<br />
+
+<div class="table-responsive">
+    <table class="table table-hover">
+        <thead>
+            <tr class="table-primary">
+                <td>Номер</td>
+                <td>Стоимость брони</td>
+                <td>Количество мест</td>
+                <td>Изображение</td>
+                <td width="260px"></td>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var obj in Model)
+            {
+                <tr>
+                    <td>@obj.number</td>
+                    <td>@obj.rentPrice</td>
+                    <td>@obj.places</td>
+                    <td>@obj.imageOf</td>
+                    <td>
+                        <div class="btn-group">
+                            <a asp-controller="AdminTools" asp-action="EditGameRoom" asp-route-id="@obj.number" class="btn btn-secondary">
+                                <i class="bi bi-pencil-square"></i> &nbsp; Изменить
+                            </a>
+
+                            <a asp-controller="AdminTools" asp-action="DeleteGameRoom" asp-route-id="@obj.number" class="btn btn-danger">
+                                <i class="bi bi-trash3"></i> &nbsp; Удалить
+                            </a>
+                        </div>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

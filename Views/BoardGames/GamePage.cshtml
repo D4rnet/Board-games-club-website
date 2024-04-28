@@ -1,0 +1,44 @@
+﻿@model BoardGame
+@{
+    ViewData["Title"] = Model.nameOf;
+}
+
+<h1 class="text-center m-5">@Model.nameOf</h1>
+
+<div class="px-3">
+    <div class="gameInfo align-items-center">
+        <img class="w-50" style="object-fit:scale-down" src="@Model.imageOf" height="400" alt="" />
+
+        <div style="font-size: 18px;">
+            <div class="d-flex flex-column align-items-center">
+                <div class="d-flex">
+                    <h2 class="text-center my-0">@Model.rentPrice BYN</h2>
+                    <button type="button" class="btn btn-outline-info mx-2 p-1" data-bs-container="body" data-bs-toggle="popover" data-bs-placement="right" data-bs-content="Это цена брони настольной игры на время брони комнаты" data-bs-original-title="За что указана цена?"><i class="bi bi-question-lg"></i></button>
+                </div>
+            </div>
+
+            <br />
+            <br />
+
+            <div>
+                <p><i class="bi bi-person-fill"></i>@Model.minPlayers-@Model.maxPlayers</p>
+                <p><i class="bi bi-hourglass-split"></i>@Model.avgDuration мин.</p>
+                <h5>@Model.ageCategory+</h5>
+            </div>
+
+            <br />
+
+            <div>
+                <p>Тип: <span class="badge bg-primary">@Model.typeOf</span></p>
+                <p>Производитель: <span class="text-primary">@Model.manufacturer</span></p>
+            </div>
+        </div>
+    </div>
+
+    <br />
+
+    <div style="text-indent:30px;">
+        <h3>Описание:</h3>
+        <p class="textJustify">@Model.descriptionOf</p>
+    </div>
+</div>

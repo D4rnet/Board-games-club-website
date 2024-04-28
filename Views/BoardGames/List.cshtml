@@ -1,0 +1,178 @@
+﻿@model FiltredGames
+@{
+    ViewData["Title"] = "Список настольных игр";
+}
+
+<h1 class="text-center m-5">Настольные игры</h1>
+
+<form method="post">
+    <div class="input-group mb-5" style="padding: 0 30%;">
+        <input asp-for="gameName" type="text" class="form-control" placeholder="Введите название игры" aria-label="Введите название игры">
+        <button class="btn btn-primary" type="submit"><i class="bi bi-search"></i></button>
+    </div>
+
+    <div class="filterStruct">
+        <div class="card border-secondary">
+            <div class="card-header d-flex justify-content-between align-items-center">
+                <p class="m-0">Фильтр</p>
+                <button class="btn btn-outline-secondary" type="submit"><i class="bi bi-funnel"></i></button>
+            </div>
+            <div class="card-body">
+                <h5>Настольные игры</h5>
+                <div class="form-group mt-3">
+                    @foreach (var obj in Model.typeOf)
+                    {
+                        <div class="form-check">
+                            <input asp-for="@Model.typeOf[obj.Key]" class="form-check-input" type="checkbox">
+                            <label class="form-check-label">
+                                @obj.Key
+                            </label>
+                        </div>
+                    }
+                </div>
+
+                <br />
+                <br />
+
+                <h5>Количество игроков</h5>
+                <div class="form-group d-flex justify-content-between mt-3">
+                    <input asp-for="minPlayers" type="number" class="form-control form-control-sm" min="1" max="99">
+                    <span class="dash"></span>
+                    <input asp-for="maxPlayers" type="number" class="form-control form-control-sm" min="2" max="100">
+                </div>
+
+                <br />
+                <br />
+
+                <h5>Длительность игры</h5>
+                <div class="form-group mt-3">
+                    <div class="form-check">
+                        <input asp-for="@Model.gameDuration["0-15"]" class="form-check-input" type="checkbox">
+                        <label class="form-check-label" for="before15">
+                            До 15 минут
+                        </label>
+                    </div>
+
+                    <div class="form-check">
+                        <input asp-for="@Model.gameDuration["16-30"]" class="form-check-input" type="checkbox">
+                        <label class="form-check-label" for="16to30">
+                            16 - 30 минут
+                        </label>
+                    </div>
+
+                    <div class="form-check">
+                        <input asp-for="@Model.gameDuration["31-60"]" class="form-check-input" type="checkbox">
+                        <label class="form-check-label" for="31to60">
+                            31 - 60 минут
+                        </label>
+                    </div>
+
+                    <div class="form-check">
+                        <input asp-for="@Model.gameDuration["61-120"]" class="form-check-input" type="checkbox">
+                        <label class="form-check-label" for="61to120">
+                            61 - 120 минут
+                        </label>
+                    </div>
+
+                    <div class="form-check">
+                        <input asp-for="@Model.gameDuration["121-9999"]" class="form-check-input" type="checkbox">
+                        <label class="form-check-label" for="from2">
+                            от 2 часов
+                        </label>
+                    </div>
+                </div>
+
+                <br />
+                <br />
+
+                <h5>Возраст</h5>
+                <div class="form-group mt-3">
+                    <div class="form-check">
+                        <input asp-for="@Model.ageCategory["3-5"]" class="form-check-input" type="checkbox">
+                        <label class="form-check-label" for="3to5">
+                            3 - 5 лет
+                        </label>
+                    </div>
+
+                    <div class="form-check">
+                        <input asp-for="@Model.ageCategory["6-7"]" class="form-check-input" type="checkbox">
+                        <label class="form-check-label" for="6to7">
+                            6 - 7 лет
+                        </label>
+                    </div>
+
+                    <div class="form-check">
+                        <input asp-for="@Model.ageCategory["8-12"]" class="form-check-input" type="checkbox">
+                        <label class="form-check-label" for="8to12">
+                            8 - 12 лет
+                        </label>
+                    </div>
+
+                    <div class="form-check">
+                        <input asp-for="@Model.ageCategory["13-15"]" class="form-check-input" type="checkbox">
+                        <label class="form-check-label" for="13to15">
+                            13 - 15 лет
+                        </label>
+                    </div>
+
+                    <div class="form-check">
+                        <input asp-for="@Model.ageCategory["16-17"]" class="form-check-input" type="checkbox">
+                        <label class="form-check-label" for="16to17">
+                            16 - 17 лет
+                        </label>
+                    </div>
+
+                    <div class="form-check">
+                        <input asp-for="@Model.ageCategory["18-100"]" class="form-check-input" type="checkbox">
+                        <label class="form-check-label" for="more18">
+                            более 18 лет
+                        </label>
+                    </div>
+                </div>
+
+                <br />
+                <br />
+
+                <h5>Производитель</h5>
+                <div class="form-group mt-3">
+                    @foreach (var obj in Model.manufacturer)
+                    {
+                        <div class="form-check">
+                            <input asp-for="@Model.manufacturer[obj.Key]" class="form-check-input" type="checkbox">
+                            <label class="form-check-label">
+                                @obj.Key
+                            </label>
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+
+        <div class="boardGamesGrid">
+            @{
+                if (Model.boardGameList.Count() > 0)
+                {
+                    foreach (var obj in Model.boardGameList)
+                    {
+                        <a asp-controller="BoardGames" asp-action="GamePage" asp-route-id="@obj.nameOf" class="hoverCard btn card text-white bg-secondary text-center">
+                            <div class="card-body p-4 d-flex flex-column justify-content-between">
+                                <img class="card-img-top mb-1" style="object-fit:scale-down" height="220" src="@obj.imageOf" alt="" />
+                                <h4 class="card-title">@obj.nameOf</h4>
+                                <div class="d-flex justify-content-between mt-3">
+                                    <p class="card-text my-0 mx-1"><i class="bi bi-person-fill"></i>@obj.minPlayers-@obj.maxPlayers</p>
+                                    <p class="card-text my-0 mx-2"><i class="bi bi-hourglass-split"></i>@obj.avgDuration мин.</p>
+                                    <h5 class="card-text my-0 mx-2">@obj.ageCategory+</h5>
+                                </div>
+                            </div>
+                        </a>
+                    }
+                }
+                else
+                {
+                    <h5 class="mt-3">Ничего не найдено</h5>
+                }
+            }
+
+        </div>
+    </div>
+</form>

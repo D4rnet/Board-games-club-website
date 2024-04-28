@@ -1,0 +1,55 @@
+﻿@model IEnumerable<Member>
+@{
+    ViewData["Title"] = "Таблица участников";
+}
+
+<div class="container mt-3 p-2">
+    <div class="row pt-4">
+        <div class="col-6">
+            <h2>Список участников</h2>
+        </div>
+        <div class="col-6 text-end">
+            <a asp-controller="AdminTools" asp-action="CreateMember" class="btn btn-secondary">
+                Добавить участника &nbsp; <i class="bi bi-plus-circle"></i>
+            </a>
+        </div>
+    </div>
+</div>
+
+<br />
+
+<div class="table-responsive">
+    <table class="table table-hover">
+        <thead>
+            <tr class="table-primary">
+                <td>Номер</td>
+                <td>Номер брони</td>
+                <td>Адрес электронной почты пользователя</td>
+                <td>Количество человек</td>
+                <td width="260px"></td>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var obj in Model)
+            {
+                <tr>
+                    <td>@obj.id</td>
+                    <td>@obj.rentId</td>
+                    <td>@obj.userEmail</td>
+                    <td>@obj.peopleCount</td>
+                    <td>
+                        <div class="btn-group">
+                            <a asp-controller="AdminTools" asp-action="EditMember" asp-route-id="@obj.id" class="btn btn-secondary">
+                                <i class="bi bi-pencil-square"></i> &nbsp; Изменить
+                            </a>
+
+                            <a asp-controller="AdminTools" asp-action="DeleteMember" asp-route-id="@obj.id" class="btn btn-danger">
+                                <i class="bi bi-trash3"></i> &nbsp; Удалить
+                            </a>
+                        </div>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
